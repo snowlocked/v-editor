@@ -35,6 +35,13 @@ export default {
   },
   props: {
     /**
+     * 编辑区占位符
+     */
+    placeholder: {
+      type: String,
+      default: ''
+    },
+    /**
      * 编辑区高度（不包括 toolbar），支持数字类型（默认单位 px）和 css 长度字符串
      */
     height: {
@@ -84,6 +91,7 @@ export default {
       return merge(
         defaultEditorOptions,
         {
+          placeholder: this.placeholder,
           extraPlugins: [ImageUploader(uploadImg)],
           autosave: {
             save: debounce(editor => {
@@ -157,9 +165,13 @@ export default {
     }
   }
 
+  .ck.ck-editor__editable > .ck-placeholder::before {
+    color: #c0c4cc;
+  }
+
   ol,
   ul {
-    padding-left: 1em;
+    padding-left: 1.5em;
   }
 
   // 不要影响 ul 的列表项
